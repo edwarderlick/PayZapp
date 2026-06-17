@@ -1,5 +1,12 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "rewrites": [
+    { "source": "/proxy/circle-api/:path*",    "destination": "https://api.circle.com/:path*" },
+    { "source": "/proxy/iris-api/:path*",       "destination": "https://iris-api.circle.com/:path*" },
+    { "source": "/proxy/iris-sandbox/:path*",   "destination": "https://iris-api-sandbox.circle.com/:path*" },
+    { "source": "/proxy/gateway-api/:path*",    "destination": "https://gateway-api.circle.com/:path*" },
+    { "source": "/proxy/gateway-testnet/:path*","destination": "https://gateway-api-testnet.circle.com/:path*" },
+    { "source": "/(.*)",                        "destination": "/index.html" }
+  ],
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite"
