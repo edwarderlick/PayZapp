@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PayZapp DeFi - Send USDC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Geist:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Hanken+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(32, 31, 39, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(146, 142, 160, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glass-border-gradient {
+            border: 1px solid;
+            border-image-source: linear-gradient(135deg, rgba(198, 191, 255, 0.3) 0%, rgba(146, 142, 160, 0.1) 100%);
+            border-image-slice: 1;
+        }
+        .glow-primary {
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);
+        }
+        .bg-mesh {
+            background-color: #13121b;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(108, 92, 231, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(70, 234, 229, 0.1) 0px, transparent 50%);
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #6c5ce7 !important;
+            box-shadow: 0 0 0 1px #6c5ce7;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "surface-tint": "#c6bfff",
+                      "secondary": "#46eae5",
+                      "secondary-container": "#00cec9",
+                      "inverse-primary": "#5847d2",
+                      "surface-bright": "#3a3841",
+                      "surface": "#13121b",
+                      "tertiary": "#c6c0ff",
+                      "surface-variant": "#35343d",
+                      "on-tertiary-container": "#faf6ff",
+                      "on-secondary-fixed": "#00201f",
+                      "on-secondary-fixed-variant": "#00504e",
+                      "primary-container": "#6c5ce7",
+                      "outline-variant": "#474554",
+                      "secondary-fixed": "#5af9f3",
+                      "inverse-surface": "#e5e0ed",
+                      "on-surface-variant": "#c8c4d7",
+                      "on-surface": "#e5e0ed",
+                      "on-tertiary": "#2c256f",
+                      "on-primary-fixed": "#160066",
+                      "primary": "#c6bfff",
+                      "tertiary-container": "#6f68b5",
+                      "surface-container-lowest": "#0e0d15",
+                      "surface-container-high": "#2a2932",
+                      "error-container": "#93000a",
+                      "surface-container-low": "#1c1b23",
+                      "secondary-fixed-dim": "#2edcd7",
+                      "on-secondary": "#003735",
+                      "primary-fixed": "#e4dfff",
+                      "on-secondary-container": "#005250",
+                      "surface-dim": "#13121b",
+                      "primary-fixed-dim": "#c6bfff",
+                      "tertiary-fixed": "#e4dfff",
+                      "inverse-on-surface": "#312f38",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#c6c0ff",
+                      "on-tertiary-fixed-variant": "#433d87",
+                      "surface-container": "#201f27",
+                      "on-primary-fixed-variant": "#4029ba",
+                      "on-primary": "#2900a0",
+                      "surface-container-highest": "#35343d",
+                      "on-background": "#e5e0ed",
+                      "on-primary-container": "#faf6ff",
+                      "error": "#ffb4ab",
+                      "outline": "#928ea0",
+                      "on-tertiary-fixed": "#17095a",
+                      "background": "#13121b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "24px",
+                      "gutter": "24px",
+                      "xl": "64px",
+                      "xs": "8px",
+                      "sm": "16px",
+                      "base": "4px",
+                      "lg": "40px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Hanken Grotesk"],
+                      "display-lg": ["Hanken Grotesk"],
+                      "label-sm": ["Geist"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "mono-data": ["Geist"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "body-md": ["Hanken Grotesk"],
+                      "label-md": ["Geist"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-mesh text-on-surface min-h-screen font-body-md selection:bg-primary/30">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-md py-xs bg-surface/60 backdrop-blur-xl border-b border-outline-variant/20">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<h1 class="font-display-lg text-display-lg font-bold text-primary tracking-tight hidden md:block">PayZapp DeFi</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tight md:hidden">PayZapp</h1>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex items-center gap-md">
+<a class="font-label-md text-label-md text-primary font-semibold transition-colors hover:text-secondary" href="#">Send</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Bridge</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Swap</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Vault</a>
+</div>
+<div class="flex items-center gap-sm">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-secondary transition-colors cursor-pointer active:scale-95">account_balance_wallet</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-secondary transition-colors cursor-pointer active:scale-95">notifications</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/50">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB66wtqzsD2dwE20XZ4-6e4CMTnCI2RciCUrc-FxyhHN8iNm_cdi0iCyF6iFraCRiLPTHULhYG2PzGw3hEEjhH-7v0gccs6Qc3pslJw8-hs2VNNXqewChfbbbIUVbC-4A8bbonWDfdrbJhW00oQ4ytFZXWC9Q22surj8Q0ro4WjEr1TwrSNVe9Rhix5dhKpc9rHo4xHDapWb9WpWXxh5Yi5Pr0kerlEvXOP2RnVphgINt1hjXf8wRXSNdRDQgEt3QkWfnu3gH3iMlI"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-md max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Main Transaction Column -->
+<div class="md:col-span-8 lg:col-span-8 flex flex-col gap-lg">
+<div class="flex flex-col gap-xs">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Send USDC</h2>
+<p class="font-body-md text-on-surface-variant">Transfer digital assets securely across decentralized networks.</p>
+</div>
+<!-- Glass Transaction Card -->
+<section class="glass-card rounded-xl p-md md:p-lg flex flex-col gap-md relative overflow-hidden">
+<!-- Decorative Glow -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-[100px]"></div>
+<!-- Recipient Input -->
+<div class="flex flex-col gap-base">
+<label class="font-label-md text-label-md text-outline">Recipient Wallet Address</label>
+<div class="relative group">
+<input class="w-full bg-black/20 border border-outline-variant/30 rounded-lg px-md py-sm font-mono-data text-on-surface transition-all group-hover:border-outline-variant/60" placeholder="0x..." type="text"/>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-outline group-hover:text-primary transition-colors">qr_code_scanner</span>
+</div>
+</div>
+<!-- Amount Input -->
+<div class="flex flex-col gap-base">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-outline">Amount to Send</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Balance: 12,450.00 USDC</span>
+</div>
+<div class="flex gap-sm">
+<div class="relative flex-grow group">
+<input class="w-full bg-black/20 border border-outline-variant/30 rounded-lg px-md py-sm font-mono-data text-on-surface transition-all group-hover:border-outline-variant/60 pr-24" placeholder="0.00" type="number"/>
+<div class="absolute right-xs top-1/2 -translate-y-1/2 flex items-center gap-xs">
+<button class="px-xs py-1 bg-surface-container-high rounded text-label-sm font-semibold text-secondary hover:bg-surface-variant transition-colors">MAX</button>
+<div class="flex items-center gap-xs px-xs py-1 bg-primary-container/20 rounded border border-primary-container/30">
+<div class="w-4 h-4 rounded-full bg-[#2775ca] flex items-center justify-center text-[10px] font-bold text-white">$</div>
+<span class="font-label-sm font-bold text-primary">USDC</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Description -->
+<div class="flex flex-col gap-base">
+<label class="font-label-md text-label-md text-outline">Description (Optional)</label>
+<textarea class="w-full bg-black/20 border border-outline-variant/30 rounded-lg px-md py-sm font-body-md text-on-surface transition-all hover:border-outline-variant/60 resize-none" placeholder="What's this for?" rows="2"></textarea>
+</div>
+<!-- Summary/Fee Row -->
+<div class="mt-xs pt-md border-t border-outline-variant/20 flex flex-col gap-xs">
+<div class="flex justify-between items-center font-label-md text-label-md">
+<span class="text-outline">Network Fee (Estimated)</span>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm text-secondary">bolt</span>
+<span class="text-on-surface">~ 0.45 USDC</span>
+</div>
+</div>
+<div class="flex justify-between items-center font-label-md text-label-md">
+<span class="text-outline">Estimated Arrival</span>
+<span class="text-on-surface-variant">~ 30 seconds</span>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full mt-md py-sm rounded-lg bg-gradient-to-b from-primary-container to-[#5847d2] font-headline-md text-headline-md text-on-primary-container glow-primary transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-sm">
+<span>Send Funds</span>
+<span class="material-symbols-outlined">send</span>
+</button>
+</section>
+</div>
+<!-- Sidebar: Recent Contacts -->
+<aside class="md:col-span-4 lg:col-span-4 flex flex-col gap-md">
+<div class="glass-card rounded-xl p-md flex flex-col gap-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Recent Contacts</h3>
+<button class="material-symbols-outlined text-outline hover:text-secondary">add</button>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Contact Item -->
+<button class="flex items-center gap-md p-xs rounded-lg hover:bg-surface-variant/40 transition-all text-left group">
+<div class="relative">
+<img alt="Avatar of Alex Johnson" class="w-10 h-10 rounded-full border border-primary/20" data-alt="A futuristic circular 3D avatar portrait of a person with cybernetic details, glowing purple accents against a deep dark background, consistent with a high-end DeFi application style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ-GWmnCaM3ji4q039KboA3fqIwR9OjI8E-XDCiC4n5WAjfjm4wW7xwNn0lmFm3zIDZ1YVN2upVjnGuabeHoUqORQ3LUf0foEHiqQk-d4TKYFOSoJ1t29JV-A9oKKrt0N1hd8SaG3TK3kooGEPVFb65JSHkIbnxtQWb68uuOpPXAyBw3aSfdWY_5CT4B8_raEO-jEo3WF9E3N2qSytDfIFzDKpFIYYTtDwSWRaeX27Lfzmst6Abx2CpFttDtrh0uwI9eBHhwdxA10"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-secondary rounded-full border-2 border-surface shadow-[0_0_8px_rgba(70,234,229,0.8)]"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface font-semibold group-hover:text-primary">Alex Johnson</span>
+<span class="font-mono-data text-[10px] text-outline">0x71C...4e92</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-secondary opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</button>
+<!-- Contact Item -->
+<button class="flex items-center gap-md p-xs rounded-lg hover:bg-surface-variant/40 transition-all text-left group">
+<div class="relative">
+<img alt="Avatar of Sarah T." class="w-10 h-10 rounded-full border border-primary/20" data-alt="A premium 3D digital illustration of a user avatar for a fintech app, featuring a sleek, modern person with minimalist features, softly illuminated by neon cyan light, set against a dark glass-morphic background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_XH_Y4q98IudKaFzyuKTqxBAu9tg2VVkvvjdKiA0SqOoKDkbq_6JN9KQnctiIfz3DTDK3PSoDl8eL4IO5DVdn6GWqg8j4yCU10QtQd9i8qR6UKYYX9F8uZoaHE1In-RC03Ufhx5Q7_eiQDiW6N5i8XttQrEfQLyarF9z_OJZ5K1yvEiK68nA6Ejd02urW3q5in2-L_uT-HVCGPUPirPce0hLX4KvOXfr_05Vb7jdfA5hNVYBmMR8Zmf-OHOOt5SmR5e9G1iXii1o"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface font-semibold group-hover:text-primary">Sarah Tan</span>
+<span class="font-mono-data text-[10px] text-outline">0x3A2...9b11</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-secondary opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</button>
+<!-- Contact Item -->
+<button class="flex items-center gap-md p-xs rounded-lg hover:bg-surface-variant/40 transition-all text-left group">
+<div class="relative">
+<img alt="Avatar of Marcus R." class="w-10 h-10 rounded-full border border-primary/20" data-alt="A stylized 3D avatar of a professional in a tech setting, with warm accent lighting and a cool dark purple background, following the visual language of modern web3 and decentralized finance interfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1LS4dzY8TclbRov6RGyIV_WpgzWCIcJ8ejrPKknEsUmUPX0vJD1IqyKb-LL803HsSzTvLaw9U2my1FdEBv1X1hBs1euzanXt5A0UUFafPx7Abmczv1KPoWNZjQjqZ9-XxDWrtF-kEkqsppnOekq7xzyHd8xLexThwCqmeRVSjU2jU1GfSdlvuI2NF5ZaTix-sIwvRPf3tdgHIOsdUbbYBGH5RrQgjYC7uvXzwBHHfaq1kgc6fJK6hKdeB5zdgtj-SfsDd_3bZHGc"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface font-semibold group-hover:text-primary">Marcus Reed</span>
+<span class="font-mono-data text-[10px] text-outline">0x1F9...d820</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-secondary opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</button>
+</div>
+<button class="w-full py-2 border border-outline-variant/30 rounded-lg text-label-md font-medium text-outline hover:bg-surface-variant/20 hover:text-on-surface transition-all">View All Contacts</button>
+</div>
+<!-- Network Status Card -->
+<div class="glass-card rounded-xl p-md border-l-4 border-secondary/50">
+<div class="flex items-center gap-sm mb-xs">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(70,234,229,0.8)]"></span>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Network Health</span>
+</div>
+<p class="font-label-md text-on-surface-variant">Ethereum Mainnet is operating at optimal speed. Gas prices are currently low.</p>
+</div>
+</aside>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 md:hidden bg-surface-container/40 backdrop-blur-2xl border-t border-outline-variant/30 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-secondary bg-secondary-container/20 rounded-xl px-4 py-1" href="#">
+<span class="material-symbols-outlined">send</span>
+<span class="font-label-sm text-label-sm">Send</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-label-sm text-label-sm">Bridge</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline" href="#">
+<span class="material-symbols-outlined">swap_horiz</span>
+<span class="font-label-sm text-label-sm">Swap</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline" href="#">
+<span class="material-symbols-outlined">lock_open</span>
+<span class="font-label-sm text-label-sm">Vault</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+</nav>
+<!-- Footer (Desktop Only) -->
+<footer class="hidden md:flex flex-col items-center gap-md py-xl px-md w-full bg-surface-container-lowest/80 border-t border-outline-variant/10">
+<div class="flex gap-lg">
+<a class="font-label-md text-label-md text-outline hover:text-secondary-fixed transition-colors" href="#">Terms</a>
+<a class="font-label-md text-label-md text-outline hover:text-secondary-fixed transition-colors" href="#">Privacy</a>
+<a class="font-label-md text-label-md text-outline hover:text-secondary-fixed transition-colors" href="#">Support</a>
+<a class="font-label-md text-label-md text-outline hover:text-secondary-fixed transition-colors" href="#">Docs</a>
+</div>
+<p class="font-label-md text-label-md text-outline">© 2024 PayZapp DeFi. Powered by Circle</p>
+</footer>
+<script>
+        // Micro-interactions for button press
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => btn.classList.add('scale-95'));
+            btn.addEventListener('mouseup', () => btn.classList.remove('scale-95'));
+            btn.addEventListener('mouseleave', () => btn.classList.remove('scale-95'));
+        });
+
+        // Simple input focus effects handled by CSS and group classes
+    </script>
+</body></html>

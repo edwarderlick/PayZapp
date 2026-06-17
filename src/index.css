@@ -1,0 +1,437 @@
+/* ─── Google Fonts ──────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── Background Scale ─────────────────────────────── */
+    --bg-base:        #0D0E14;
+    --bg-surface:     #13141B;
+    --bg-elevated:    #1A1B24;
+    --bg-input:       #0A0B10;
+    --bg-card:        #13141B;
+    --bg-header:      rgba(13,14,20,0.92);
+    --bg-ticker:      rgba(4,3,12,0.65);
+
+    /* ── Borders ──────────────────────────────────────── */
+    --border-subtle:  rgba(255,255,255,0.06);
+    --border-default: rgba(255,255,255,0.10);
+    --border-accent:  rgba(0, 212, 170, 0.45);
+
+    /* ── Brand ───────────────────────────────────────── */
+    --primary:            #00D4AA;
+    --primary-dark:       #00A882;
+    --primary-glow:       rgba(0, 212, 170, 0.25);
+    --primary-container:  rgba(0, 212, 170, 0.10);
+    --secondary:          #5B67F3;
+    --secondary-glow:     rgba(91, 103, 243, 0.25);
+    --accent-gold:        #F5A623;
+    --accent-red:         #F05252;
+
+    /* ── Text ─────────────────────────────────────────── */
+    --text-primary:   #FFFFFF;
+    --text-secondary: rgba(255,255,255,0.55);
+    --text-muted:     rgba(255,255,255,0.30);
+    --text-disabled:  rgba(255,255,255,0.18);
+
+    /* ── Semantic ─────────────────────────────────────── */
+    --success:  #00D4AA;
+    --danger:   #F05252;
+    --warning:  #F5A623;
+
+    /* ── Z-Index Scale ────────────────────────────────── */
+    --z-base:     1;
+    --z-card:     10;
+    --z-dropdown: 20;
+    --z-sticky:   30;
+    --z-overlay:  40;
+    --z-modal:    50;
+
+    /* Legacy aliases for compat */
+    --on-surface:        #FFFFFF;
+    --on-surface-variant: rgba(255,255,255,0.55);
+    --outline:           rgba(255,255,255,0.30);
+  }
+}
+
+/* ─── Light Theme ────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg-base:        #F7F8FA;
+  --bg-surface:     #FFFFFF;
+  --bg-elevated:    #F0F1F5;
+  --bg-input:       #F4F5F8;
+  --bg-card:        #FFFFFF;
+  --bg-header:      rgba(255,255,255,0.92);
+  --bg-ticker:      rgba(240,241,245,0.85);
+  --border-subtle:  rgba(0,0,0,0.06);
+  --border-default: rgba(0,0,0,0.10);
+  --border-accent:  rgba(0, 212, 170, 0.45);
+  --text-primary:   #0D0E14;
+  --text-secondary: rgba(13,14,20,0.55);
+  --text-muted:     rgba(13,14,20,0.35);
+  --text-disabled:  rgba(13,14,20,0.20);
+  --on-surface:        #0D0E14;
+  --on-surface-variant: rgba(13,14,20,0.55);
+  --outline:           rgba(13,14,20,0.30);
+  --modal-bg:       rgba(255,255,255,0.98);
+}
+
+/* ─── Light Theme — Tailwind utility overrides ─────────────────────────
+   Most feature panels (Swap/Bridge/Send/Vault/History/Split) were built
+   with literal dark-mode-only Tailwind opacity utilities (text-white/40,
+   bg-black/40, border-white/10, etc.) rather than the CSS variables above.
+   These are real generated classes (not inline styles), so they can be
+   safely remapped here with !important, scoped to [data-theme="light"],
+   without touching every component file individually. Exact class
+   selectors only — deliberately NOT using [class*="..."] substring
+   matching, since that would also catch hover:/group-hover: prefixed
+   variants and break their conditional behavior.                       */
+/* Solid white text -> primary dark text */
+[data-theme="light"] .text-white { color: var(--text-primary) !important; }
+
+/* Faint dark-mode text (5–20%) -> disabled-tier text */
+[data-theme="light"] .text-white\/5, [data-theme="light"] .text-white\/10,
+[data-theme="light"] .text-white\/15, [data-theme="light"] .text-white\/20 {
+  color: var(--text-disabled) !important;
+}
+/* Muted dark-mode text (25–45%) */
+[data-theme="light"] .text-white\/25, [data-theme="light"] .text-white\/30,
+[data-theme="light"] .text-white\/35, [data-theme="light"] .text-white\/40,
+[data-theme="light"] .text-white\/45 {
+  color: var(--text-muted) !important;
+}
+/* Secondary-weight dark-mode text (50–95%) */
+[data-theme="light"] .text-white\/50, [data-theme="light"] .text-white\/55,
+[data-theme="light"] .text-white\/60, [data-theme="light"] .text-white\/65,
+[data-theme="light"] .text-white\/70, [data-theme="light"] .text-white\/75,
+[data-theme="light"] .text-white\/80, [data-theme="light"] .text-white\/85,
+[data-theme="light"] .text-white\/90, [data-theme="light"] .text-white\/95 {
+  color: var(--text-secondary) !important;
+}
+
+/* Dark-only translucent surfaces -> visible elevated card surface */
+[data-theme="light"] .bg-black\/5,  [data-theme="light"] .bg-black\/10,
+[data-theme="light"] .bg-black\/15, [data-theme="light"] .bg-black\/20,
+[data-theme="light"] .bg-black\/25, [data-theme="light"] .bg-black\/30,
+[data-theme="light"] .bg-black\/35, [data-theme="light"] .bg-black\/40,
+[data-theme="light"] .bg-black\/45, [data-theme="light"] .bg-black\/50,
+[data-theme="light"] .bg-black\/55, [data-theme="light"] .bg-black\/60,
+[data-theme="light"] .bg-black\/65, [data-theme="light"] .bg-black\/70,
+[data-theme="light"] .bg-black\/75, [data-theme="light"] .bg-black\/80,
+[data-theme="light"] .bg-black\/85, [data-theme="light"] .bg-black\/90,
+[data-theme="light"] .bg-black\/95,
+[data-theme="light"] .bg-white\/5,  [data-theme="light"] .bg-white\/10,
+[data-theme="light"] .bg-white\/15, [data-theme="light"] .bg-white\/20,
+[data-theme="light"] .bg-white\/25 {
+  background-color: var(--bg-elevated) !important;
+}
+
+/* Imperceptible white borders -> visible neutral border */
+[data-theme="light"] .border-white\/5,  [data-theme="light"] .border-white\/10,
+[data-theme="light"] .border-white\/15, [data-theme="light"] .border-white\/20,
+[data-theme="light"] .border-white\/25, [data-theme="light"] .border-white\/30,
+[data-theme="light"] .border-white\/35, [data-theme="light"] .border-white\/40 {
+  border-color: var(--border-default) !important;
+}
+
+/* Specific recurring arbitrary-value classes (Tailwind bracket syntax) used
+   verbatim across many feature panels — same rationale as above, fixed
+   centrally instead of touching every file. */
+[data-theme="light"] .text-\[rgba\(255\,255\,255\,0\.4\)\] {
+  color: var(--text-muted) !important;
+}
+[data-theme="light"] .bg-\[\#13121b\],
+[data-theme="light"] .bg-\[\#13141B\],
+[data-theme="light"] .bg-\[\#13141b\] {
+  background-color: var(--bg-card) !important;
+}
+[data-theme="light"] .border-\[rgba\(146\,142\,160\,0\.15\)\],
+[data-theme="light"] .border-\[rgba\(146\,142\,160\,0\.2\)\],
+[data-theme="light"] .border-\[rgba\(146\,142\,160\,0\.14\)\] {
+  border-color: var(--border-default) !important;
+}
+[data-theme="light"] .bg-\[\#09090B\],
+[data-theme="light"] .bg-\[\#09090b\] {
+  background-color: var(--bg-card) !important;
+}
+[data-theme="light"] .border-\[rgba\(198\,191\,255\,0\.15\)\],
+[data-theme="light"] .border-\[rgba\(198\,191\,255\,0\.2\)\] {
+  border-color: var(--border-default) !important;
+}
+
+/* Pseudo-class/element variants (disabled:, placeholder:) — same recurring
+   dark-only utilities, different selector shape since the prefix changes
+   which combinator Tailwind generates. */
+[data-theme="light"] .disabled\:bg-white\/5:disabled {
+  background-color: var(--bg-elevated) !important;
+}
+[data-theme="light"] .disabled\:text-white\/20:disabled {
+  color: var(--text-disabled) !important;
+}
+[data-theme="light"] .disabled\:border-white\/5:disabled {
+  border-color: var(--border-subtle) !important;
+}
+[data-theme="light"] .placeholder\:text-white\/15::placeholder,
+[data-theme="light"] .placeholder\:text-white\/20::placeholder,
+[data-theme="light"] .placeholder\:text-white\/30::placeholder {
+  color: var(--text-disabled) !important;
+}
+
+/* ─── Base Reset ────────────────────────────────────────────────────── */
+html {
+  height: 100%;
+  background-color: var(--bg-base, #0D0E14);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  background-color: var(--bg-base, #0D0E14);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Space Grotesk', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Ambient Background ─────────────────────────────────────────────── */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+body::before {
+  width: 800px;
+  height: 600px;
+  top: -150px;
+  left: -200px;
+  background: radial-gradient(ellipse, rgba(0,212,170,0.06) 0%, rgba(0,212,170,0.02) 50%, transparent 70%);
+  animation: orb-drift-a 20s ease-in-out infinite alternate;
+}
+body::after {
+  width: 600px;
+  height: 600px;
+  bottom: -150px;
+  right: -150px;
+  background: radial-gradient(ellipse, rgba(91,103,243,0.07) 0%, rgba(91,103,243,0.02) 50%, transparent 70%);
+  animation: orb-drift-b 25s ease-in-out infinite alternate;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────────────── */
+@keyframes orb-drift-a {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(40px, 30px) scale(1.08); }
+}
+@keyframes orb-drift-b {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-30px, -20px) scale(1.06); }
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(0,212,170,0.25); }
+  50%       { box-shadow: 0 0 32px rgba(0,212,170,0.5); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Ticker ─────────────────────────────────────────────────────────── */
+.ticker-track {
+  display: flex;
+  animation: ticker-scroll 50s linear infinite;
+  width: max-content;
+}
+.ticker-track:hover { animation-play-state: paused; }
+
+/* ─── Utility Classes ────────────────────────────────────────────────── */
+@layer utilities {
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+
+  /* Premium surface primitives */
+  .card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.00) 100%), var(--bg-card, #13141B);
+    border: 1px solid var(--border-subtle);
+    border-radius: 1.25rem;
+    position: relative;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(800px 240px at 10% -30%, rgba(0,212,170,0.18), transparent 55%),
+                radial-gradient(520px 220px at 110% 0%, rgba(91,103,243,0.14), transparent 55%);
+    opacity: 0;
+    transition: opacity 220ms ease;
+  }
+
+  .card:hover::after {
+    opacity: 1;
+  }
+
+  .surface-hover {
+    border-color: rgba(255,255,255,0.14);
+    box-shadow: 0 0 0 1px rgba(0,212,170,0.10), 0 18px 60px rgba(0,0,0,0.35);
+  }
+
+  .halo-border {
+    position: relative;
+  }
+
+  .halo-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(0,212,170,0.55), rgba(91,103,243,0.45), rgba(0,212,170,0.55));
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .halo-border > * {
+    position: relative;
+    z-index: 1;
+  }
+
+
+  /* Subtle glass — only used sparingly */
+  .glass {
+    background: rgba(19, 20, 27, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .glass-card {
+    background: rgba(19, 20, 27, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 1.25rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .glass-card:hover {
+    border-color: rgba(255,255,255,0.14);
+    box-shadow: 0 0 0 1px rgba(0,212,170,0.08), 0 16px 48px rgba(0,0,0,0.4);
+  }
+
+  /* Glows */
+  .glow-primary   { box-shadow: 0 0 24px rgba(0,212,170,0.3); }
+  .glow-secondary { box-shadow: 0 0 24px rgba(91,103,243,0.3); }
+  .glow-pulse     { animation: glow-pulse 3s ease-in-out infinite; }
+  .float          { animation: float 4s ease-in-out infinite; }
+
+  /* Gradient text — teal to blue */
+  .gradient-text {
+    background: linear-gradient(135deg, #00D4AA 0%, #5B67F3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-warm {
+    background: linear-gradient(135deg, #F5A623 0%, #F05252 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Animated gradient border (kept for backwards-compat) */
+  .gradient-border {
+    position: relative;
+    border-radius: 1.25rem;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(0,212,170,0.5), rgba(91,103,243,0.4), rgba(0,212,170,0.5));
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+    z-index: -1;
+  }
+
+  /* Typography helpers */
+  .font-number  { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+  .font-display { font-family: 'Inter', 'Space Grotesk', sans-serif; }
+  .font-ui      { font-family: 'Inter', 'Space Grotesk', sans-serif; }
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+::-webkit-scrollbar         { width: 4px; height: 4px; }
+::-webkit-scrollbar-track   { background: transparent; }
+::-webkit-scrollbar-thumb   { background: rgba(255,255,255,0.08); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,212,170,0.3); }
+
+/* ─── Selection ──────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(0,212,170,0.25);
+  color: #fff;
+}
+
+/* ─── Focus ──────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(0,212,170,0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Number inputs ──────────────────────────────────────────────────── */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button { -webkit-appearance: none; }
+input[type='number'] { -moz-appearance: textfield; }
+
+/* ─── Reduced motion ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

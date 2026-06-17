@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Circle Vault | PayZapp</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Geist:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            background-color: #13121b;
+            color: #e5e0ed;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(32, 31, 39, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(146, 142, 160, 0.15);
+        }
+        .vault-glow {
+            box-shadow: 0 0 40px rgba(108, 92, 231, 0.25);
+        }
+        .primary-gradient {
+            background: linear-gradient(180deg, #6c5ce7 0%, #5847d2 100%);
+        }
+        .ambient-blob {
+            position: absolute;
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#0e0d15",
+                        "on-tertiary-fixed": "#17095a",
+                        "secondary-fixed-dim": "#2edcd7",
+                        "on-surface": "#e5e0ed",
+                        "on-primary-fixed-variant": "#4029ba",
+                        "on-tertiary-fixed-variant": "#433d87",
+                        "on-primary-fixed": "#160066",
+                        "on-secondary-fixed-variant": "#00504e",
+                        "on-secondary-fixed": "#00201f",
+                        "on-secondary": "#003735",
+                        "on-background": "#e5e0ed",
+                        "on-surface-variant": "#c8c4d7",
+                        "background": "#13121b",
+                        "surface": "#13121b",
+                        "error": "#ffb4ab",
+                        "surface-container": "#201f27",
+                        "secondary-fixed": "#5af9f3",
+                        "primary": "#c6bfff",
+                        "outline": "#928ea0",
+                        "on-tertiary-container": "#faf6ff",
+                        "primary-container": "#6c5ce7",
+                        "surface-dim": "#13121b",
+                        "inverse-primary": "#5847d2",
+                        "on-error": "#690005",
+                        "surface-container-high": "#2a2932",
+                        "on-primary": "#2900a0",
+                        "inverse-surface": "#e5e0ed",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#e4dfff",
+                        "primary-fixed-dim": "#c6bfff",
+                        "secondary-container": "#00cec9",
+                        "surface-variant": "#35343d",
+                        "inverse-on-surface": "#312f38",
+                        "on-primary-container": "#faf6ff",
+                        "surface-container-highest": "#35343d",
+                        "tertiary": "#c6c0ff",
+                        "secondary": "#46eae5",
+                        "on-tertiary": "#2c256f",
+                        "surface-container-low": "#1c1b23",
+                        "on-secondary-container": "#005250",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#6f68b5",
+                        "surface-bright": "#3a3841",
+                        "outline-variant": "#474554",
+                        "primary-fixed": "#e4dfff",
+                        "tertiary-fixed-dim": "#c6c0ff",
+                        "surface-tint": "#c6bfff"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "gutter": "24px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "sm": "16px",
+                        "container-max": "1280px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "mono-data": ["Geist"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-md": ["Geist"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- Ambient background glows -->
+<div class="ambient-blob bg-primary-container w-[400px] h-[400px] -top-20 -left-20"></div>
+<div class="ambient-blob bg-secondary-container w-[300px] h-[300px] bottom-10 right-10 opacity-10"></div>
+<!-- Navigation Header -->
+<header class="bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 shadow-sm sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
+<div class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Circle Vault</div>
+<nav class="hidden md:flex gap-lg items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Send</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Bridge</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Swap</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Vault</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">History</a>
+</nav>
+<button class="bg-primary-container text-on-primary-container px-md py-xs rounded-xl font-bold hover:scale-105 transition-transform active:scale-95">
+                Connect Wallet
+            </button>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-gutter py-xl">
+<!-- Header Section: Balance & Shield -->
+<section class="flex flex-col items-center text-center mb-xl">
+<div class="relative mb-md">
+<div class="absolute inset-0 bg-primary-container/40 blur-2xl rounded-full scale-150"></div>
+<div class="relative w-20 h-20 bg-surface-container rounded-full flex items-center justify-center border-2 border-primary-container vault-glow">
+<span class="material-symbols-outlined text-primary text-[40px]" data-weight="fill">shield</span>
+</div>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Circle Unified Balance</h1>
+<div class="font-display-lg text-display-lg font-bold text-primary mb-xs">150.00 USDC</div>
+<div class="flex items-center gap-xs text-on-surface-variant font-body-md">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_#46eae5]"></span>
+                Vault Protected &amp; Earning 4.5% APY
+            </div>
+</section>
+<!-- Main Interaction Area -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+<!-- Left Side: Deposit Card -->
+<div class="lg:col-span-7 xl:col-span-8">
+<div class="glass-card rounded-[2rem] p-md md:p-xl shadow-2xl">
+<!-- Tabs -->
+<div class="flex gap-md mb-lg bg-surface-container-low p-base rounded-2xl w-fit">
+<button class="px-lg py-xs rounded-xl bg-primary-container text-on-primary-container font-bold transition-all shadow-lg">
+                            DEPOSIT
+                        </button>
+<button class="px-lg py-xs rounded-xl text-on-surface-variant font-medium hover:bg-surface-variant transition-all">
+                            SPEND
+                        </button>
+</div>
+<!-- Deposit Content -->
+<div class="space-y-md">
+<!-- Source Selector -->
+<div class="space-y-base">
+<label class="text-label-md text-on-surface-variant uppercase tracking-widest px-1">Source Chain</label>
+<div class="flex items-center justify-between p-md bg-surface-container-highest/30 rounded-2xl border border-outline-variant/20 hover:border-primary/50 cursor-pointer transition-all">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-md">hub</span>
+</div>
+<span class="font-body-md font-semibold">Ethereum Sepolia</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- Amount Input -->
+<div class="space-y-base">
+<div class="flex justify-between items-center px-1">
+<label class="text-label-md text-on-surface-variant uppercase tracking-widest">Amount</label>
+<span class="text-label-md text-primary">Balance: <span class="font-mono-data">45.20 USDC</span></span>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-2xl py-lg px-md text-headline-md font-mono-data text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:opacity-30" placeholder="0.00" type="text"/>
+<div class="absolute right-md top-1/2 -translate-y-1/2 flex items-center gap-md">
+<button class="text-label-md font-bold text-primary bg-primary/10 px-md py-xs rounded-lg hover:bg-primary/20 transition-colors">MAX</button>
+<span class="font-bold text-on-surface text-body-lg">USDC</span>
+</div>
+</div>
+</div>
+<!-- Info Banner -->
+<div class="flex items-start gap-md p-md bg-secondary-container/10 border border-secondary-container/30 rounded-2xl">
+<span class="material-symbols-outlined text-secondary-fixed-dim">info</span>
+<p class="text-label-md text-secondary-fixed-dim leading-snug">
+                                Network will switch automatically to Ethereum Sepolia before deposit
+                            </p>
+</div>
+<!-- Action Button -->
+<button class="w-full primary-gradient py-lg rounded-2xl font-headline-md font-bold text-on-primary-container shadow-xl hover:shadow-primary/20 hover:scale-[1.01] transition-all active:scale-95 flex items-center justify-center gap-md group">
+                            Deposit to Vault
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Side: History -->
+<div class="lg:col-span-5 xl:col-span-4 flex flex-col gap-md">
+<div class="flex items-center justify-between px-xs">
+<h2 class="font-headline-md text-headline-md">History</h2>
+<button class="text-primary text-label-md font-bold">View All</button>
+</div>
+<div class="space-y-sm">
+<!-- History Item 1 -->
+<div class="glass-card p-md rounded-2xl flex items-center justify-between hover:bg-surface-container-high/40 transition-all cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container/10 flex items-center justify-center border border-secondary-container/20">
+<span class="material-symbols-outlined text-secondary text-md">add</span>
+</div>
+<div>
+<p class="font-body-md font-semibold">Deposited 50 USDC</p>
+<p class="text-label-sm text-on-surface-variant">2m ago</p>
+</div>
+</div>
+<div class="bg-secondary/10 px-xs py-1 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-[10px] font-bold text-secondary uppercase tracking-tighter">Success</span>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="glass-card p-md rounded-2xl flex items-center justify-between hover:bg-surface-container-high/40 transition-all cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center border border-primary-container/20">
+<span class="material-symbols-outlined text-primary text-md">shopping_cart</span>
+</div>
+<div>
+<p class="font-body-md font-semibold">Spent 10 USDC on Base</p>
+<p class="text-label-sm text-on-surface-variant">1h ago</p>
+</div>
+</div>
+<div class="bg-secondary/10 px-xs py-1 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-[10px] font-bold text-secondary uppercase tracking-tighter">Success</span>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="glass-card p-md rounded-2xl flex items-center justify-between hover:bg-surface-container-high/40 transition-all cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container/10 flex items-center justify-center border border-secondary-container/20">
+<span class="material-symbols-outlined text-secondary text-md">add</span>
+</div>
+<div>
+<p class="font-body-md font-semibold">Deposited 100 USDC</p>
+<p class="text-label-sm text-on-surface-variant">5h ago</p>
+</div>
+</div>
+<div class="bg-secondary/10 px-xs py-1 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-[10px] font-bold text-secondary uppercase tracking-tighter">Success</span>
+</div>
+</div>
+</div>
+<!-- Ad/Banner Area -->
+<div class="relative overflow-hidden rounded-2xl bg-surface-container p-lg mt-md">
+<div class="absolute -right-4 -bottom-4 w-32 h-32 bg-primary-container/20 blur-xl rounded-full"></div>
+<h3 class="font-headline-md text-on-surface mb-xs">Unlock Premium</h3>
+<p class="text-label-md text-on-surface-variant mb-md leading-snug">Boost your APY to 5.2% with USDC staking rewards.</p>
+<button class="text-primary font-bold text-label-md flex items-center gap-1 group">
+                        Learn More
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/10">
+<div class="w-full py-lg px-gutter max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">Circle Vault</div>
+<p class="font-label-md text-label-md text-on-surface-variant">© 2024 PayZapp Circle Vault. Powered by Circle</p>
+</div>
+<div class="flex gap-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Docs</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom Nav (Suppressed based on "The UX Goal" for focused task, but kept for main vault navigation consistency) -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface/80 backdrop-blur-xl border-t border-outline-variant/10 flex justify-around items-center h-16 z-50">
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-[10px]">Wallet</span>
+</button>
+<button class="flex flex-col items-center text-primary">
+<span class="material-symbols-outlined" data-weight="fill">shield</span>
+<span class="text-[10px] font-bold">Vault</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">swap_horiz</span>
+<span class="text-[10px]">Swap</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px]">History</span>
+</button>
+</div>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Simple tab switching logic for demonstration
+        const tabs = document.querySelectorAll('.flex.gap-md.mb-lg button');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-bold');
+                    t.classList.add('text-on-surface-variant', 'font-medium');
+                });
+                tab.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold');
+                tab.classList.remove('text-on-surface-variant', 'font-medium');
+            });
+        });
+    </script>
+</body></html>

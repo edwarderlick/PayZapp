@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="pz-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#F4F6FB"/>
+    </linearGradient>
+    <linearGradient id="pz-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2DD4BF"/>
+      <stop offset="50%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="pz-bolt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22D3EE"/>
+      <stop offset="55%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#7C3AED"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="2" y="2" width="96" height="96" rx="22" fill="url(#pz-bg)"/>
+
+  <circle cx="50" cy="50" r="33" stroke="url(#pz-ring)" stroke-width="3.2" fill="none"/>
+
+  <circle cx="19" cy="38" r="4.4" stroke="#2DD4BF" stroke-width="2.6" fill="url(#pz-bg)"/>
+  <circle cx="83" cy="41" r="4.4" stroke="#3B82F6" stroke-width="2.6" fill="url(#pz-bg)"/>
+  <circle cx="39" cy="82" r="4.4" stroke="#7C3AED" stroke-width="2.6" fill="url(#pz-bg)"/>
+
+  <path d="M61 9 L29 53 L48 53 L39 91 L72 47 L53 47 Z" fill="url(#pz-bolt)"/>
+</svg>

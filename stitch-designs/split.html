@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PayZapp Split | Housemates</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#67001b",
+                    "outline": "#958da1",
+                    "surface-container-highest": "#2d3449",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#40000d",
+                    "on-surface-variant": "#ccc3d8",
+                    "tertiary-fixed-dim": "#ffb2b7",
+                    "inverse-primary": "#732ee4",
+                    "secondary-fixed": "#acedff",
+                    "tertiary-fixed": "#ffdadb",
+                    "on-background": "#dae2fd",
+                    "surface-container-low": "#131b2e",
+                    "on-tertiary-fixed-variant": "#92002a",
+                    "tertiary": "#ffb2b7",
+                    "error": "#ffb4ab",
+                    "on-surface": "#dae2fd",
+                    "on-primary-container": "#ede0ff",
+                    "inverse-surface": "#dae2fd",
+                    "on-secondary-fixed": "#001f26",
+                    "on-primary-fixed-variant": "#5a00c6",
+                    "surface-container": "#171f33",
+                    "outline-variant": "#4a4455",
+                    "surface-variant": "#2d3449",
+                    "surface-container-lowest": "#060e20",
+                    "primary-fixed": "#eaddff",
+                    "on-secondary-container": "#00424e",
+                    "on-secondary": "#003640",
+                    "tertiary-container": "#c81a42",
+                    "on-error": "#690005",
+                    "on-tertiary-container": "#ffdedf",
+                    "on-primary-fixed": "#25005a",
+                    "primary-container": "#7c3aed",
+                    "surface": "#0b1326",
+                    "on-primary": "#3f008e",
+                    "primary-fixed-dim": "#d2bbff",
+                    "background": "#0b1326",
+                    "on-secondary-fixed-variant": "#004e5c",
+                    "surface-tint": "#d2bbff",
+                    "secondary": "#4cd7f6",
+                    "surface-container-high": "#222a3d",
+                    "primary": "#d2bbff",
+                    "inverse-on-surface": "#283044",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#4cd7f6",
+                    "secondary-container": "#03b5d3",
+                    "surface-dim": "#0b1326",
+                    "surface-bright": "#31394d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width-desktop": "1200px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "container-margin": "24px",
+                    "stack-md": "16px",
+                    "gutter": "16px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "label-md": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "label-sm": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "body-md": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(210, 187, 255, 0.2);
+            background: rgba(30, 41, 59, 0.6);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(149, 141, 161, 0.2);
+            border-radius: 10px;
+        }
+        .nav-active {
+            background: #7c3aed;
+            color: #ede0ff;
+        }
+    </style>
+</head>
+<body class="h-screen overflow-hidden flex flex-col">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-container-margin py-stack-sm h-16 fixed top-0 z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_rgba(124,58,237,0.2)]">
+<div class="flex items-center gap-8">
+<span class="font-display-lg text-display-lg font-bold text-primary dark:text-primary tracking-tight">PayZapp</span>
+<nav class="hidden md:flex gap-6">
+<a class="font-body-md text-body-md text-outline dark:text-outline hover:text-secondary-fixed transition-colors duration-200" href="#">Send</a>
+<a class="font-body-md text-body-md text-outline dark:text-outline hover:text-secondary-fixed transition-colors duration-200" href="#">Bridge</a>
+<a class="font-body-md text-body-md text-outline dark:text-outline hover:text-secondary-fixed transition-colors duration-200" href="#">Swap</a>
+<a class="font-body-md text-body-md text-outline dark:text-outline hover:text-secondary-fixed transition-colors duration-200" href="#">Vault</a>
+<a class="font-body-md text-body-md text-secondary dark:text-secondary border-b-2 border-secondary pb-1 active:scale-95 transition-transform" href="#">History</a>
+<a class="font-body-md text-body-md text-outline dark:text-outline hover:text-secondary-fixed transition-colors duration-200" href="#">Split</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-outline hover:text-secondary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-outline hover:text-secondary transition-colors">settings</button>
+<img alt="User avatar" class="w-8 h-8 rounded-full border border-primary/20" data-alt="A professional close-up headshot of a stylish man with a confident expression, set against a blurred urban background. The lighting is moody and dramatic with violet and cyan highlights reflecting the high-tech DeFi brand aesthetic. The overall mood is sophisticated and energetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl1AmnvuufdmAX_8vnoMazHdO8jPsxZ7nxIWBRNGL2Bu3_tHO-au5wlVV3D3a6hQLvVLVRWGIyOI-Eo1d0u2-lp3CcLVSZiMBosm4loBxUVZelalJ4flSfqwlu7-RGL7JLb2UPY-3ALlXDW32iAdDgcHyYrZw4nGGRMKHg-BXmllTSkYmKDZsUZUyIjFMoTH24yixuJXKYdi-KPWTguIk5RfvXoAUiqRzi-KRUv9kUbEQSra5NBVcdeFFbgdjW4CFv105v-NK81Bc"/>
+</div>
+</header>
+<div class="flex flex-1 pt-16 h-full">
+<!-- SideNavBar / Rooms Management -->
+<aside class="h-full w-80 fixed left-0 top-16 bg-surface-container dark:bg-surface-container border-r border-white/5 shadow-lg shadow-black/40 flex flex-col p-stack-md gap-stack-sm custom-scrollbar overflow-y-auto">
+<div class="mb-6">
+<div class="flex justify-between items-center mb-4 px-2">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Rooms</h2>
+<p class="font-label-sm text-label-sm text-outline">Managing 4 Active Groups</p>
+</div>
+<button class="bg-primary text-on-primary-fixed font-label-md py-2 px-4 rounded-lg hover:brightness-110 active:scale-95 transition-all">Create Room</button>
+</div>
+<div class="space-y-3">
+<!-- Room Card 1 -->
+<div class="glass-card p-4 rounded-xl cursor-pointer bg-primary-container text-on-primary-container border-primary/20">
+<div class="flex justify-between items-start mb-2">
+<span class="font-headline-md text-[18px]">Housemates</span>
+<span class="bg-primary/20 text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border border-background" data-alt="A young professional woman smiling warmly, set against a dark architectural background with subtle cyan lighting. High-end corporate portraiture style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbTa-Bw9Usi0cBRXg6MQtOcNAN8HwyMNsmI54AcXOFIXC_qWA26X2dVbhtVHeFY097dM9RnV0qxLiePsCTR5pGtWPSp_9xUqdcqpyR4UglyDd-9tdkUTYsqc_UWHz41jaPOXYqCTAYPqon6HjKuXvQqHHYCZCm2lgikWG1lgY2z-hsePxmEiM5I8cRqjeUCiipZAZvTYa3WOv7C3VR1LvW9nrwZHl3DIpURCFGWLS02gbuUA75LTt8YJCBpsRRVUFxTV97ZxJb2BE"/>
+<img class="w-6 h-6 rounded-full border border-background" data-alt="Close up portrait of a man with spectacles looking thoughtful. Soft ambient violet lighting in a minimalist office setting. Modern tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3hq5kPCLANO7GQKy4ptRCFRPr2yhfoK3QFcKmLSV_xfB6nDjEREBhj2tnTKW2uVYzrnno0JXtwI-3RS7M4CRBKSf9jGgQSWevvGWTZU5UHJdmGdS6Xg2l569448JbuNT7PlvmeJ0e-3saqYDi_fRc-3N07zbTDQahkNZhCE_iRXdnw2ldC_c96ADi33wax0t-NiFQ4X2yfkRPtK4hV0JMgXCMwNsXi6uADYk5b6grCmIT3lvunvobupxQ0HANCAMnOskxqHXqVn0"/>
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border border-background flex items-center justify-center text-[10px] font-bold">+2</div>
+</div>
+<span class="text-label-sm text-on-primary-container/70">4 Members</span>
+</div>
+<div class="flex justify-between items-end">
+<span class="text-label-sm">Total Balance</span>
+<span class="text-secondary font-bold text-lg">$1,240.00</span>
+</div>
+</div>
+<!-- Room Card 2 -->
+<div class="glass-card p-4 rounded-xl cursor-pointer hover:bg-surface-variant group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-headline-md text-[18px] text-on-surface">Crypto Squad</span>
+<span class="bg-outline/20 text-outline px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Settled</span>
+</div>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border border-background" data-alt="Portrait of a female developer in a high-tech environment. Deep blue and cyan lighting accents create a professional DeFi atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD56-n8Z2P4EYU300m41DMkUFz-jr_tJ_Lv5qB7jPTEbxEBmjFiJrBj-UecnU5Hz5XRT5SJSyhorYpNWY2cT4_QUDdI-_ouQ6r4rGmkvfxJRebeL0zPUB7Wj9ts_USbaoN9F_QfY_oA61DVgAVPaBcQL7Gt956267IVfMiG1dZmPUO6MqQ56VNpGeUKHIJT1y1NPVGzGfF5I0Uqssj0t4e-5lxckRtva2xVoQc01ZeL65OSYkC-Itivv0A4eMHsRBQup_7PpEK2rpw"/>
+</div>
+<span class="text-label-sm text-outline">12 Members</span>
+</div>
+<div class="flex justify-between items-end">
+<span class="text-label-sm text-outline">Total Balance</span>
+<span class="text-on-surface/50 font-bold text-lg">$0.00</span>
+</div>
+</div>
+<!-- Room Card 3 -->
+<div class="glass-card p-4 rounded-xl cursor-pointer hover:bg-surface-variant group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-headline-md text-[18px] text-on-surface">Euro Trip</span>
+<span class="bg-primary/20 text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border border-background" data-alt="Portrait of an energetic traveler with mountains in the background, stylized with a dark navy and purple color overlay. Professional high-contrast photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCScx3EsVzGzR3BpVN2zBcp_65qeO_oGttLVf3lhNDBZMK656oO95kqZc67dEJKqJPkGtNS0ipCpSzBUs6_K1uPzGjBPW_RcNnOpDRz6dx_xyH4fFZdG_te_TIGE8-QrC5EqhJ5lwKLgY6iNHWVp_r69OScyh3H-u1nWVUYfOjRipc9svZrIYSgSannXpN0A6lNnV7nx-YQAuWFbSjiKPDzns4SuapsAJqfsvRE6QLkL0zPlel7Y_VlyfBkerBlNR0MnDsYt9xqSYw"/>
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border border-background flex items-center justify-center text-[10px] font-bold">+5</div>
+</div>
+<span class="text-label-sm text-outline">8 Members</span>
+</div>
+<div class="flex justify-between items-end">
+<span class="text-label-sm text-outline">Total Balance</span>
+<span class="text-secondary font-bold text-lg">$4,850.20</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t border-white/5">
+<div class="flex flex-col gap-2">
+<button class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Help Center</span>
+</button>
+<button class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-error">Logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-80 overflow-y-auto custom-scrollbar p-stack-lg">
+<!-- Canvas Header -->
+<div class="max-w-max-width-desktop mx-auto">
+<div class="flex justify-between items-center mb-8">
+<div class="flex items-center gap-4">
+<h1 class="font-display-lg text-headline-lg text-on-surface">Housemates</h1>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">edit</button>
+</div>
+<button class="bg-primary-container text-on-primary-container font-headline-md text-body-md py-3 px-6 rounded-xl shadow-lg shadow-primary-container/30 hover:translate-y-[-2px] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+                        Add Expense
+                    </button>
+</div>
+<!-- Bento Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-32">
+<span class="text-label-sm text-outline uppercase tracking-widest font-bold">My Share</span>
+<span class="text-headline-lg text-on-surface">$425.50</span>
+</div>
+<div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-32 border-l-4 border-l-tertiary-container">
+<span class="text-label-sm text-outline uppercase tracking-widest font-bold">To Be Paid</span>
+<span class="text-headline-lg text-tertiary-fixed-dim">$180.20</span>
+</div>
+<div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-32 border-l-4 border-l-secondary-container">
+<span class="text-label-sm text-outline uppercase tracking-widest font-bold">To Receive</span>
+<span class="text-headline-lg text-secondary">$310.00</span>
+</div>
+<div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-32 bg-primary-container/10">
+<span class="text-label-sm text-outline uppercase tracking-widest font-bold">Status</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></span>
+<span class="text-headline-md text-primary">Unsettled</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Recent Expenses -->
+<div class="lg:col-span-8">
+<div class="glass-card rounded-2xl p-6 overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-on-surface">Recent Expenses</h3>
+<button class="text-primary font-label-md hover:underline">View All</button>
+</div>
+<div class="space-y-4">
+<!-- Expense Item 1 -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-tertiary">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">home</span>
+</div>
+<div>
+<p class="font-headline-md text-body-md text-on-surface">Rent - November</p>
+<p class="text-label-sm text-outline">Paid by You • Split equally (4 people)</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-6">
+<div>
+<p class="font-headline-md text-body-md text-secondary">+$1,200.00</p>
+<p class="text-label-sm text-outline">Pending 3/4</p>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+<!-- Expense Item 2 -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-secondary">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">shopping_cart</span>
+</div>
+<div>
+<p class="font-headline-md text-body-md text-on-surface">Grocery Restock</p>
+<p class="text-label-sm text-outline">Paid by Sarah J. • Your share: $42.50</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-6">
+<div>
+<p class="font-headline-md text-body-md text-tertiary-fixed-dim">-$42.50</p>
+<p class="text-label-sm text-on-secondary-container px-2 bg-secondary-container/30 rounded-full inline-block">Settled</p>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+<!-- Expense Item 3 -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-tertiary">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<div>
+<p class="font-headline-md text-body-md text-on-surface">Electricity Bill</p>
+<p class="text-label-sm text-outline">Paid by Mike T. • Your share: $68.00</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-6">
+<div>
+<p class="font-headline-md text-body-md text-tertiary-fixed-dim">-$68.00</p>
+<p class="text-label-sm text-outline">Pending</p>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Settlements Sidebar -->
+<div class="lg:col-span-4 space-y-gutter">
+<div class="glass-card rounded-2xl p-6">
+<h3 class="font-headline-md text-on-surface mb-6">Outstanding</h3>
+<!-- Owe Section -->
+<div class="mb-8">
+<p class="text-label-sm text-outline uppercase tracking-widest font-bold mb-4">You Owe</p>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full" data-alt="Portrait of Mike, a friendly housemate in a casual setting. Warm ambient lighting, high-quality digital photography with a modern split-expense UI context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSKbHDJ43HzavCAFV9PUhU89OMvNNkXXoX5KmzzkZ29ouTaWoBV-P88bAZ0pp__V2irngJ4gUih_jEYvx1JOVf6Wphdw7m9qI-9L1C7_Jn9kciNVqqrDevFZGAzR06HZy42XueiyikkCRKpNjIMCnXfGWqicQc5RhPqMcEA968nLk43SX0mL9wYxAL1blFPQFCyvMRHDYQEIfGNrIIX-ZolUI_opN2ORWzjhDGOFAIjmUwMdURPWCJJKYci8BwKLxA_AJ6JpW0j54"/>
+<div>
+<p class="font-label-md text-on-surface">Mike T.</p>
+<p class="text-label-sm text-tertiary-fixed-dim">$68.00</p>
+</div>
+</div>
+<button class="bg-[#7c3aed] text-white text-label-sm px-4 py-2 rounded-lg font-bold hover:brightness-125 shadow-lg shadow-[#7c3aed]/20 transition-all">Pay Now</button>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full" data-alt="A portrait of Sarah, a focused young woman in a bright workspace, visualized through a stylized high-tech interface aesthetic. Soft violet and navy tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0YHMnwz--zKeXOw78d44kG_SwfG4YkxKcQ-knxmg94BqFmXfnYoRbdE3PU8_6wpHhCkFkkVYb5VWha75DO_NyrTCnEjiNNmEPgygKP78pH7-MgViTN-Up2T72qLHfK6F5XJdmrq0BltIrgtyA5MiZviqM4kPMQZHWc-athgArZGdgPX9rVqKxyDEKxqj3iaEjWdd8mACNhr-6RVo0gxdj4Jmty5a9bTEau10_EZxi1ScR1QF3KERdr4d-cyRdcX6l6LbmRKW93sI"/>
+<div>
+<p class="font-label-md text-on-surface">Sarah J.</p>
+<p class="text-label-sm text-tertiary-fixed-dim">$112.20</p>
+</div>
+</div>
+<button class="bg-[#7c3aed] text-white text-label-sm px-4 py-2 rounded-lg font-bold hover:brightness-125 shadow-lg shadow-[#7c3aed]/20 transition-all">Pay Now</button>
+</div>
+</div>
+</div>
+<!-- Owed Section -->
+<div>
+<p class="text-label-sm text-outline uppercase tracking-widest font-bold mb-4">You are Owed</p>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary font-bold">DC</div>
+<div>
+<p class="font-label-md text-on-surface">David Chen</p>
+<p class="text-label-sm text-secondary">$310.00</p>
+</div>
+</div>
+<button class="border border-secondary text-secondary text-label-sm px-4 py-2 rounded-lg font-bold hover:bg-secondary/10 transition-all">Remind</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Mini Chart/Stats -->
+<div class="glass-card rounded-2xl p-6 bg-gradient-to-br from-primary-container/20 to-transparent">
+<h4 class="font-label-md text-on-surface mb-4">Monthly Spending</h4>
+<div class="flex items-end gap-2 h-24 mb-4">
+<div class="flex-1 bg-surface-container-highest rounded-t-lg transition-all hover:bg-primary" style="height: 40%"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg transition-all hover:bg-primary" style="height: 60%"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg transition-all hover:bg-primary" style="height: 85%"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg transition-all hover:bg-primary" style="height: 50%"></div>
+<div class="flex-1 bg-primary rounded-t-lg" style="height: 100%"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg transition-all hover:bg-primary" style="height: 70%"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-lg transition-all hover:bg-primary" style="height: 45%"></div>
+</div>
+<p class="text-label-sm text-outline text-center">Trending 12% higher than last month</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0px)';
+            });
+        });
+
+        // Simulating loading animation for progress
+        window.addEventListener('load', () => {
+            const bars = document.querySelectorAll('.h-24 div');
+            bars.forEach((bar, index) => {
+                const targetHeight = bar.style.height;
+                bar.style.height = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    bar.style.height = targetHeight;
+                }, 200 + (index * 100));
+            });
+        });
+    </script>
+</body></html>
